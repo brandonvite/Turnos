@@ -19,7 +19,7 @@ namespace Turnos.Migrations
                     Telefono = table.Column<string>(unicode: false, maxLength: 20, nullable: false),
                     Email = table.Column<string>(unicode: false, maxLength: 50, nullable: false),
                     HorarioAtencionDesde = table.Column<DateTime>(unicode: false, nullable: false),
-                    HorarioAtencionAsta = table.Column<DateTime>(unicode: false, nullable: false)
+                    HorarioAtencionHasta = table.Column<DateTime>(unicode: false, nullable: false)
                 },
                 constraints: table =>
                 {

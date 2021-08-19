@@ -10,8 +10,8 @@ using Turnos.Models;
 namespace Turnos.Migrations
 {
     [DbContext(typeof(TurnosContext))]
-    [Migration("20210623010424_MigracionMedico")]
-    partial class MigracionMedico
+    [Migration("20210623151909_MigracionMedicoEspecialidad")]
+    partial class MigracionMedicoEspecialidad
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -89,6 +89,21 @@ namespace Turnos.Migrations
                     b.ToTable("Medico");
                 });
 
+            modelBuilder.Entity("Turnos.Models.MedicoEspecialidad", b =>
+                {
+                    b.Property<int>("IdMedico")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdEspecialidad")
+                        .HasColumnType("int");
+
+                    b.HasKey("IdMedico", "IdEspecialidad");
+
+                    b.HasIndex("IdEspecialidad");
+
+                    b.ToTable("MedicoEspecialidad");
+                });
+
             modelBuilder.Entity("Turnos.Models.Paciente", b =>
                 {
                     b.Property<int>("IdPaciente")
@@ -129,6 +144,21 @@ namespace Turnos.Migrations
                     b.HasKey("IdPaciente");
 
                     b.ToTable("Paciente");
+                });
+
+            modelBuilder.Entity("Turnos.Models.MedicoEspecialidad", b =>
+                {
+                    b.HasOne("Turnos.Models.Especialidad", "Especialidad")
+                        .WithMany("MedicoEspecialidad")
+                        .HasForeignKey("IdEspecialidad")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Turnos.Models.Medico", "Medico")
+                        .WithMany("MedicoEspecialidad")
+                        .HasForeignKey("IdMedico")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
